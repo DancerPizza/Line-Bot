@@ -18,14 +18,19 @@ from linebot.v3.messaging import (
 
 # ====== 一、Flask & LINE Bot 基本設定 ======
 app = Flask(__name__)
-load_dotenv()
 
-# TODO: 填入你的 LINE Channel Secret 與 Access Token
-CHANNEL_SECRET = "843e64fbd03459c057e7138cdc8260d6"
-CHANNEL_ACCESS_TOKEN = "13OmkZafGyHZ68WZ4LLM4o2xwTtMg/BuY/mIVEnKupdheNrs6YXxNekdB+w6HaBG+Kz9YS6N9eLrSxXNKdyRwCpI6p8G04XVEWxYbZnw3EBqlAM9nP+9uzWvuy2hNxGYDPa/uGSXyylzH7iX1gwAmgdB04t89/1O/w1cDnyilFU="
+# LINE Channel Secret、Access Token以env檔載入
+load_dotenv(load_dotenv(dotenv_path="./.env"))
 
+CHANNEL_SECRET = os.getenv("LINE_CHANNEL_SECRET")
+CHANNEL_ACCESS_TOKEN = os.getenv("CHANNEL_ACCESS_TOKEN")
+
+# 初始化
 parser = WebhookParser(CHANNEL_SECRET)
 configuration = Configuration(access_token=CHANNEL_ACCESS_TOKEN)
+
+print("SECRET:", CHANNEL_SECRET)
+print("TOKEN:", CHANNEL_ACCESS_TOKEN)
 
 # 關鍵字設定
 KEYWORD_RESPONSES = {
